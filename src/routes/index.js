@@ -4,6 +4,7 @@ const memberRoutes = require('./memberRoutes');
 const loanRoutes = require('./loanRoutes');
 const loanRequestRoutes = require('./loanRequestRoutes');
 const settingsRoutes = require('./settingsRoutes');
+const fixedSavingRoutes = require('./fixedSavingRoutes');
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.use('/members', memberRoutes);
 router.use('/loans', loanRoutes);
 router.use('/loan-requests', loanRequestRoutes);
 router.use('/settings', settingsRoutes);
+router.use('/fixed-savings', fixedSavingRoutes);
 
 module.exports = router;

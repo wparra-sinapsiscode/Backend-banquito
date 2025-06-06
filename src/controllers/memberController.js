@@ -1,4 +1,5 @@
 const memberService = require('../services/memberService');
+const fixedSavingService = require('../services/fixedSavingService');
 
 class MemberController {
   async createMember(req, res, next) {
@@ -104,6 +105,40 @@ class MemberController {
       res.json({
         success: true,
         data: statistics
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // Fixed Savings endpoints
+  async createFixedSaving(req, res, next) {
+    try {
+      const { id } = req.params;
+      const fixedSavingData = req.body;
+      
+      const fixedSaving = await fixedSavingService.createFixedSaving(id, fixedSavingData);
+      
+      res.status(201).json({
+        success: true,
+        message: 'Plan de ahorro a plazo fijo creado exitosamente',
+        data: fixedSaving
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getMemberFixedSavings(req, res, next) {
+    try {
+      const { id } = req.params;
+      const filters = req.query;
+      
+      const fixedSavings = await fixedSavingService.getFixedSavingsByMember(id, filters);
+      
+      res.json({
+        success: true,
+        data: fixedSavings
       });
     } catch (error) {
       next(error);

@@ -13,6 +13,7 @@ const Loan = require('./Loan')(sequelize, Sequelize.DataTypes);
 const LoanRequest = require('./LoanRequest')(sequelize, Sequelize.DataTypes);
 const Payment = require('./Payment')(sequelize, Sequelize.DataTypes);
 const SavingsPlan = require('./SavingsPlan')(sequelize, Sequelize.DataTypes);
+const FixedSaving = require('./FixedSaving')(sequelize, Sequelize.DataTypes);
 const Settings = require('./Settings')(sequelize, Sequelize.DataTypes);
 
 // Add models to db object
@@ -22,6 +23,7 @@ db.Loan = Loan;
 db.LoanRequest = LoanRequest;
 db.Payment = Payment;
 db.SavingsPlan = SavingsPlan;
+db.FixedSaving = FixedSaving;
 db.Settings = Settings;
 
 // Set up associations

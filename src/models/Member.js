@@ -91,6 +91,11 @@ module.exports = (sequelize, DataTypes) => {
       as: 'savingsPlan'
     });
     
+    Member.hasMany(models.FixedSaving, {
+      foreignKey: 'memberId',
+      as: 'fixedSavings'
+    });
+    
     Member.hasOne(models.User, {
       foreignKey: 'memberId',
       as: 'user'

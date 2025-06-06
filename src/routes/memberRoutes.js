@@ -4,6 +4,7 @@ const { validateBody, validateParams, validateQuery } = require('../middleware/v
 const { authenticateToken, requireAdmin, requireAdminOrMember, requireMemberAccess } = require('../middleware/auth');
 const memberValidators = require('../validators/memberValidators');
 const { paramSchemas } = require('../validators/commonValidators');
+const { validateFixedSaving } = require('../validators/fixedSavingValidators');
 
 const router = express.Router();
 
@@ -94,5 +95,32 @@ router.put('/:id/savings-plan',
   requireMemberAccess,
   memberController.updateSavingsPlan
 );
+
+/**
+ * @swagger
+ * /api/v1/members/{id}/fixed-savings:
+ *   post:
+ *     summary: Crear plan de ahorro a plazo fijo para un miembro
+ *     tags: [Members]
+ *   get:
+ *     summary: Obtener planes de ahorro a plazo fijo de un miembro
+ *     tags: [Members]
+ */
+router.route('/:id/fixed-savings')
+  .post(
+    authenticateToken,
+    requireAdminOrMember,
+    validateParams(paramSchemas.id),
+    validateFixedSaving,
+    requireMemberAccess,
+    memberController.createFixedSaving
+  )
+  .get(
+    authenticateToken,
+    requireAdminOrMember,
+    validateParams(paramSchemas.id),
+    requireMemberAccess,
+    memberController.getMemberFixedSavings
+  );
 
 module.exports = router;
